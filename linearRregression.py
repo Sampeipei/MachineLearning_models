@@ -46,6 +46,25 @@ class linearRegression:
         return 1 - np.sum(np.square(self.predict(X) - Y)) / np.sum(np.square(Y - np.meam(Y,axis=0)))
 
     def plotResult(self, X=[], Y=[], xLabel="", yLabel="", fName=""):
-        # Result plot function
-        # New Comments
-        pass
+        if X.shape[1] != 1:
+            return
+        
+        # Calculate start and end point of a graph
+        Xlin = np.array([[0], [np.max(X)]])
+        Yplin = self.predict(Xlin)
+
+        # Plot data and linear plot
+        plt.plot(X, Y, '.', label="Data")
+        plt.plot(Xlin, Yplin, 'r', label="Linear model")
+        plt.legend()
+
+        # Axis range and label settings
+        plt.ylim([0, np.max(Y)])
+        plt.xlim([0, np.max(X)])
+        plt.xlabel(xLabel, fontSize=14)
+        plt.ylabel(yLabel, fontSize=14)
+
+        if len(fName):
+            plt.savefig(fName)
+        else:
+            plt.show()
