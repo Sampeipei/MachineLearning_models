@@ -16,7 +16,7 @@ class linearRegression:
         ZZ = np.matmul(Z.T, Z) / self.dNum
         ZY = np.matmul(Z.T, self.Y) / self.dNum
         # Optimize param
-        v_opt = np.matmul(ZZ.T, ZY)
+        v_opt = np.matmul(np.linalg.inv(ZZ), ZY)
 
         self.w = v_opt[:-1]
         self.b = v_opt[-1]
@@ -28,7 +28,7 @@ class linearRegression:
         ZZ = np.matmul(Z.T, Z) / self.dNum + lamb * np.eye(self.xDim)
         ZY = np.matmul(Z.T, self.Y) / self.dNum
         # Optimize param
-        v_opt = np.matmul(ZZ.T, ZY)
+        v_opt = np.matmul(np.linalg.inv(ZZ), ZY)
 
         self.w = v_opt[:-1]
         self.b = v_opt[-1]
